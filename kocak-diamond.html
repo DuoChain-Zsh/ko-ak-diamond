@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koçak Diamond | Pırlanta & Altın Mücevherat</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #C9A96E;
+      --gold-light: #D4B97A;
+      --gold-dark: #B8944F;
+      --dark: #1A1A1A;
+      --darker: #0D0D0D;
+      --cream: #FAF7F2;
+      --text-light: #E8E4DF;
+      --text-muted: #9A9590;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--darker);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    .font-display { font-family: 'Playfair Display', serif; }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes pulse-gold {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201,169,110,0.4); }
+      50% { box-shadow: 0 0 20px 5px rgba(201,169,110,0.15); }
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .animate-fade-in-up { animation: fadeInUp 0.8s ease forwards; }
+    .animate-fade-in { animation: fadeIn 1s ease forwards; }
+    .animate-shimmer {
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold), var(--gold-dark));
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite linear;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .animate-pulse-gold { animation: pulse-gold 2s ease-in-out infinite; }
+    .animate-slide-down { animation: slideDown 0.6s ease forwards; }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+
+    /* Gold gradient text */
+    .text-gold-gradient {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Gold border gradient */
+    .border-gold {
+      border: 1px solid rgba(201,169,110,0.3);
+    }
+    .border-gold-hover:hover {
+      border-color: rgba(201,169,110,0.7);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--darker); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+
+    /* Hero background pattern */
+    .hero-pattern {
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(201,169,110,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(201,169,110,0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(201,169,110,0.03) 0%, transparent 50%);
+    }
+
+    /* Diamond shape decoration */
+    .diamond-shape {
+      width: 12px; height: 12px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      opacity: 0.6;
+    }
+
+    /* Section divider */
+    .section-divider {
+      width: 80px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto;
+    }
+
+    /* Card hover effects */
+    .product-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(201,169,110,0.15);
+    }
+
+    /* Category card */
+    .category-card {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .category-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%);
+      z-index: 1;
+    }
+    .category-card:hover {
+      transform: scale(1.03);
+    }
+    .category-card:hover .cat-overlay {
+      opacity: 1;
+    }
+
+    /* Nav glass effect */
+    .nav-glass {
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* Button styles */
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--darker);
+      font-weight: 600;
+      padding: 14px 36px;
+      border-radius: 2px;
+      letter-spacing: 1.5px;
+      font-size: 13px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      box-shadow: 0 8px 25px rgba(201,169,110,0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-weight: 500;
+      padding: 14px 36px;
+      border-radius: 2px;
+      letter-spacing: 1.5px;
+      font-size: 13px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: var(--gold);
+      color: var(--darker);
+    }
+
+    /* Intersection Observer animation classes */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Luxury line decoration */
+    .luxury-line::before,
+    .luxury-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.4));
+    }
+    .luxury-line::after {
+      background: linear-gradient(90deg, rgba(201,169,110,0.4), transparent);
+    }
+
+    /* Testimonial card */
+    .testimonial-card {
+      background: linear-gradient(145deg, rgba(26,26,26,0.8), rgba(26,26,26,0.4));
+      border: 1px solid rgba(201,169,110,0.15);
+    }
+
+    /* Map container */
+    .map-container {
+      background: linear-gradient(135deg, rgba(201,169,110,0.1), rgba(26,26,26,0.9));
+      border: 1px solid rgba(201,169,110,0.2);
+    }
+
+    /* Floating diamonds decoration */
+    .floating-diamond {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      opacity: 0.15;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* WhatsApp button */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37,211,102,0.5);
+    }
+
+    /* Product image placeholder with diamond icon */
+    .product-img {
+      background: linear-gradient(145deg, #1a1a1a, #252525);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-img::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.05), transparent);
+      transition: left 0.5s ease;
+    }
+    .product-card:hover .product-img::after {
+      left: 100%;
+    }
+
+    /* Stat counter */
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(13,13,13,0.98);
+      z-index: 998;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+    .mobile-menu.active {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* Tab functionality */
+    .tab-btn {
+      padding: 10px 24px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem !important; }
+      .desktop-nav { display: none !important; }
+      .mobile-toggle { display: flex !important; }
+    }
+    @media (min-width: 769px) {
+      .mobile-toggle { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-50 animate-slide-down">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="relative">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M20 2 L35 14 L20 38 L5 14 Z" stroke="url(#logoGrad)" stroke-width="1.5" fill="none"/>
+            <path d="M5 14 H35" stroke="url(#logoGrad)" stroke-width="1"/>
+            <path d="M14 2 L10 14 L20 38" stroke="url(#logoGrad)" stroke-width="0.8" opacity="0.5"/>
+            <path d="M26 2 L30 14 L20 38" stroke="url(#logoGrad)" stroke-width="0.8" opacity="0.5"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#B8944F"/>
+                <stop offset="50%" stop-color="#D4B97A"/>
+                <stop offset="100%" stop-color="#C9A96E"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div>
+          <div class="font-display text-xl tracking-wider text-gold-gradient font-semibold">KOÇAK</div>
+          <div class="text-[10px] tracking-[4px] uppercase" style="color: var(--text-muted);">Diamond</div>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="desktop-nav flex items-center gap-8">
+        <a href="#hero" class="text-sm tracking-wider uppercase hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Ana Sayfa</a>
+        <a href="#hakkimizda" class="text-sm tracking-wider uppercase hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Hakkımızda</a>
+        <a href="#kategoriler" class="text-sm tracking-wider uppercase hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Kategoriler</a>
+        <a href="#koleksiyonlar" class="text-sm tracking-wider uppercase hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Koleksiyonlar</a>
+        <a href="#hizmetler" class="text-sm tracking-wider uppercase hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Hizmetler</a>
+        <a href="#iletisim" class="text-sm tracking-wider uppercase hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">İletişim</a>
+        <a href="https://www.instagram.com/kocakpirlantakuyumculuk/" target="_blank" class="ml-4" style="color: var(--gold);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+      </div>
+
+      <!-- Mobile Toggle -->
+      <button class="mobile-toggle flex-col gap-1.5 cursor-pointer bg-transparent border-none" onclick="toggleMobileMenu()">
+        <span class="w-6 h-0.5 bg-[var(--gold)] block transition-all" id="bar1"></span>
+        <span class="w-6 h-0.5 bg-[var(--gold)] block transition-all" id="bar2"></span>
+        <span class="w-4 h-0.5 bg-[var(--gold)] block transition-all" id="bar3"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#hero" class="text-2xl font-display tracking-wider" style="color: var(--gold);" onclick="toggleMobileMenu()">Ana Sayfa</a>
+    <a href="#hakkimizda" class="text-2xl font-display tracking-wider" style="color: var(--text-light);" onclick="toggleMobileMenu()">Hakkımızda</a>
+    <a href="#kategoriler" class="text-2xl font-display tracking-wider" style="color: var(--text-light);" onclick="toggleMobileMenu()">Kategoriler</a>
+    <a href="#koleksiyonlar" class="text-2xl font-display tracking-wider" style="color: var(--text-light);" onclick="toggleMobileMenu()">Koleksiyonlar</a>
+    <a href="#hizmetler" class="text-2xl font-display tracking-wider" style="color: var(--text-light);" onclick="toggleMobileMenu()">Hizmetler</a>
+    <a href="#iletisim" class="text-2xl font-display tracking-wider" style="color: var(--text-light);" onclick="toggleMobileMenu()">İletişim</a>
+  </div>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center hero-pattern">
+    <!-- Floating decorations -->
+    <div class="floating-diamond" style="top:15%;left:10%;animation-delay:0s;"></div>
+    <div class="floating-diamond" style="top:25%;right:15%;animation-delay:1s;width:6px;height:6px;"></div>
+    <div class="floating-diamond" style="bottom:30%;left:20%;animation-delay:2s;width:10px;height:10px;"></div>
+    <div class="floating-diamond" style="top:60%;right:10%;animation-delay:0.5s;"></div>
+    <div class="floating-diamond" style="bottom:15%;right:30%;animation-delay:1.5s;width:5px;height:5px;"></div>
+
+    <div class="text-center px-6 max-w-4xl mx-auto">
+      <!-- Diamond icon -->
+      <div class="mb-8 animate-float">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" class="mx-auto opacity-60">
+          <path d="M30 5 L50 22 L30 55 L10 22 Z" stroke="url(#heroGrad)" stroke-width="1" fill="none"/>
+          <path d="M10 22 H50" stroke="url(#heroGrad)" stroke-width="0.8" opacity="0.5"/>
+          <path d="M22 5 L17 22 L30 55" stroke="url(#heroGrad)" stroke-width="0.5" opacity="0.3"/>
+          <path d="M38 5 L43 22 L30 55" stroke="url(#heroGrad)" stroke-width="0.5" opacity="0.3"/>
+          <defs>
+            <linearGradient id="heroGrad" x1="10" y1="5" x2="50" y2="55">
+              <stop offset="0%" stop-color="#B8944F"/>
+              <stop offset="100%" stop-color="#D4B97A"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="flex items-center gap-4 justify-center mb-6 luxury-line animate-fade-in">
+        <span class="text-xs tracking-[6px] uppercase" style="color: var(--gold); white-space: nowrap;">Elvankent &bull; Ankara</span>
+      </div>
+
+      <h1 class="hero-title font-display text-6xl md:text-7xl font-bold mb-6 animate-fade-in-up" style="line-height:1.1;">
+        <span class="text-gold-gradient">Zarafet</span><br>
+        <span style="color: var(--text-light);">Her Detayda</span>
+      </h1>
+
+      <p class="text-lg mb-10 max-w-2xl mx-auto animate-fade-in-up delay-200" style="color: var(--text-muted); line-height: 1.8;">
+        Pırlanta ve altın mücevheratta yılların deneyimi ile özel anlarınıza değer katıyoruz.
+        Tektaş yüzüklerden altın bileziklere, her parça ustalıkla tasarlanır.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-300">
+        <a href="#koleksiyonlar" class="btn-gold inline-block text-center">Koleksiyonları Keşfet</a>
+        <a href="#iletisim" class="btn-outline inline-block text-center">Randevu Al</a>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="mt-20 grid grid-cols-3 gap-8 max-w-lg mx-auto animate-fade-in-up delay-400">
+        <div class="stat-item">
+          <div class="font-display text-3xl font-bold text-gold-gradient">500+</div>
+          <div class="text-xs tracking-wider uppercase mt-1" style="color: var(--text-muted);">Ürün Çeşidi</div>
+        </div>
+        <div class="stat-item" style="border-left: 1px solid rgba(201,169,110,0.2); border-right: 1px solid rgba(201,169,110,0.2);">
+          <div class="font-display text-3xl font-bold text-gold-gradient">IGI</div>
+          <div class="text-xs tracking-wider uppercase mt-1" style="color: var(--text-muted);">Sertifikalı</div>
+        </div>
+        <div class="stat-item">
+          <div class="font-display text-3xl font-bold text-gold-gradient">1000+</div>
+          <div class="text-xs tracking-wider uppercase mt-1" style="color: var(--text-muted);">Mutlu Müşteri</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in delay-500">
+      <span class="text-xs tracking-[3px] uppercase" style="color: var(--text-muted);">Keşfet</span>
+      <div class="w-px h-8" style="background: linear-gradient(180deg, var(--gold), transparent);"></div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section id="hakkimizda" class="py-28 px-6 relative">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <!-- Left: Image placeholder -->
+        <div class="reveal">
+          <div class="relative">
+            <div class="aspect-[4/5] rounded-sm overflow-hidden relative" style="background: linear-gradient(145deg, #1a1a1a, #222);">
+              <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" alt="Koçak Diamond Mücevherat" style="width:100%;height:100%;object-fit:cover;">
+              <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.3) 50%, transparent 100%);"></div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <div class="font-display text-2xl text-gold-gradient">Koçak Diamond</div>
+                <div class="text-xs tracking-[3px] uppercase mt-1" style="color: var(--text-light);">Elvankent &bull; Ankara</div>
+              </div>
+            </div>
+            <!-- Decorative border -->
+            <div class="absolute -bottom-4 -right-4 w-full h-full border-gold rounded-sm -z-10"></div>
+          </div>
+        </div>
+
+        <!-- Right: Content -->
+        <div class="reveal" style="animation-delay: 0.2s;">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="diamond-shape"></div>
+            <span class="text-xs tracking-[4px] uppercase" style="color: var(--gold);">Hakkımızda</span>
+          </div>
+
+          <h2 class="font-display text-4xl md:text-5xl font-bold mb-6" style="line-height: 1.2;">
+            <span style="color: var(--text-light);">Güvenin ve</span><br>
+            <span class="text-gold-gradient">Zarafetin Adresi</span>
+          </h2>
+
+          <div class="section-divider mb-8" style="margin: 0; margin-bottom: 2rem;"></div>
+
+          <p class="mb-6 leading-relaxed" style="color: var(--text-muted);">
+            <strong style="color: var(--gold);">Koçak Pırlanta Kuyumculuk</strong>, Ankara'nın Etimesgut ilçesinde Elvankent bölgesinde hizmet veren köklü bir mücevherat mağazasıdır. Yılların birikimi ve ustalığıyla, her bir mücevheri özenle seçiyor ve müşterilerimize sunuyoruz.
+          </p>
+
+          <p class="mb-8 leading-relaxed" style="color: var(--text-muted);">
+            Altın bileziklerden pırlanta tektaş yüzüklere, nişan-düğün setlerinden yatırım amaçlı altın ürünlere kadar geniş ürün yelpazemizle her zevke ve bütçeye uygun seçenekler sunuyoruz. Uluslararası <strong style="color: var(--gold);">IGI sertifikalı</strong> pırlantalarımız ile güvenli ve kaliteli alışveriş deneyimi garantisi veriyoruz.
+          </p>
+
+          <div class="grid grid-cols-2 gap-6 mb-10">
+            <div class="flex items-start gap-3">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" class="flex-shrink-0 mt-0.5">
+                <path d="M12 2L15 8.5L22 9.5L17 14.5L18 21.5L12 18.5L6 21.5L7 14.5L2 9.5L9 8.5Z"/>
+              </svg>
+              <div>
+                <div class="font-semibold text-sm" style="color: var(--text-light);">Premium Kalite</div>
+                <div class="text-xs mt-1" style="color: var(--text-muted);">En seçkin taşlar ve metaller</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" class="flex-shrink-0 mt-0.5">
+                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"/>
+              </svg>
+              <div>
+                <div class="font-semibold text-sm" style="color: var(--text-light);">IGI Sertifika</div>
+                <div class="text-xs mt-1" style="color: var(--text-muted);">Uluslararası güvence</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" class="flex-shrink-0 mt-0.5">
+                <path d="M12 21C12 21 4 15 4 8.5C4 5.42 6.42 3 9.5 3C11.24 3 12.91 3.81 12 5C11.09 3.81 12.76 3 14.5 3C17.58 3 20 5.42 20 8.5C20 15 12 21 12 21Z"/>
+              </svg>
+              <div>
+                <div class="font-semibold text-sm" style="color: var(--text-light);">Özel Tasarım</div>
+                <div class="text-xs mt-1" style="color: var(--text-muted);">Kişiye özel mücevherler</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" class="flex-shrink-0 mt-0.5">
+                <path d="M17 21V19C17 16.7909 15.2091 15 13 15H5C2.79086 15 1 16.7909 1 19V21M23 21V19C23 17.3431 21.8284 15.9322 20.2422 15.489M16 3.13C17.7699 3.57329 19 5.13627 19 7C19 8.86373 17.7699 10.4267 16 10.87M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z"/>
+              </svg>
+              <div>
+                <div class="font-semibold text-sm" style="color: var(--text-light);">Uzman Kadro</div>
+                <div class="text-xs mt-1" style="color: var(--text-muted);">Deneyimli mücevher danışmanları</div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#iletisim" class="btn-gold inline-block">Bize Ulaşın</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CATEGORIES SECTION ========== -->
+  <section id="kategoriler" class="py-28 px-6" style="background: linear-gradient(180deg, var(--darker), #111, var(--darker));">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="flex items-center gap-3 justify-center mb-4">
+          <div class="diamond-shape"></div>
+          <span class="text-xs tracking-[4px] uppercase" style="color: var(--gold);">Kategoriler</span>
+          <div class="diamond-shape"></div>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-gold-gradient">Ürün Kategorilerimiz</span>
+        </h2>
+        <p class="max-w-xl mx-auto" style="color: var(--text-muted);">
+          Her zevke ve özel ana uygun, titizlikle hazırlanmış koleksiyonlarımızı keşfedin.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        <!-- Category 1: Pırlanta Yüzük -->
+        <div class="category-card rounded-lg aspect-[3/4] flex items-end p-6 cursor-pointer reveal" style="background: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
+          <div class="relative z-10">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" class="mb-3 opacity-90">
+              <circle cx="20" cy="20" r="14" stroke="var(--gold)" stroke-width="1"/>
+              <path d="M20 6 L24 14 L20 10 L16 14 Z" fill="var(--gold)" opacity="0.8"/>
+              <circle cx="20" cy="20" r="6" stroke="var(--gold)" stroke-width="0.8" fill="none"/>
+            </svg>
+            <div class="font-display text-xl font-semibold mb-1" style="color: var(--text-light);">Pırlanta Yüzükler</div>
+            <div class="text-xs" style="color: var(--gold-light);">Tektaş, Beştaş, Tamtur</div>
+          </div>
+          <div class="cat-overlay absolute inset-0 opacity-10 transition-opacity duration-500" style="background: linear-gradient(135deg, rgba(201,169,110,0.2), transparent);"></div>
+        </div>
+
+        <!-- Category 2: Altın Bilezik -->
+        <div class="category-card rounded-lg aspect-[3/4] flex items-end p-6 cursor-pointer reveal" style="background: url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80') center/cover no-repeat; animation-delay: 0.1s;">
+          <div class="relative z-10">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" class="mb-3 opacity-90">
+              <ellipse cx="20" cy="20" rx="16" ry="10" stroke="var(--gold)" stroke-width="1" fill="none"/>
+              <ellipse cx="20" cy="20" rx="12" ry="7" stroke="var(--gold)" stroke-width="0.8" fill="none" opacity="0.6"/>
+              <ellipse cx="20" cy="20" rx="8" ry="4" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.4"/>
+            </svg>
+            <div class="font-display text-xl font-semibold mb-1" style="color: var(--text-light);">Altın Bilezikler</div>
+            <div class="text-xs" style="color: var(--gold-light);">14K & 22K, Kelepçe, Burma</div>
+          </div>
+          <div class="cat-overlay absolute inset-0 opacity-10 transition-opacity duration-500" style="background: linear-gradient(135deg, rgba(201,169,110,0.2), transparent);"></div>
+        </div>
+
+        <!-- Category 3: Kolyeler -->
+        <div class="category-card rounded-lg aspect-[3/4] flex items-end p-6 cursor-pointer reveal" style="background: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80') center/cover no-repeat; animation-delay: 0.2s;">
+          <div class="relative z-10">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" class="mb-3 opacity-90">
+              <path d="M10 8 Q20 35 30 8" stroke="var(--gold)" stroke-width="1" fill="none"/>
+              <circle cx="20" cy="26" r="4" stroke="var(--gold)" stroke-width="1" fill="none"/>
+              <path d="M20 22 L22 26 L20 24 L18 26 Z" fill="var(--gold)" opacity="0.8"/>
+            </svg>
+            <div class="font-display text-xl font-semibold mb-1" style="color: var(--text-light);">Kolyeler</div>
+            <div class="text-xs" style="color: var(--gold-light);">Pırlanta, Altın, Zincir</div>
+          </div>
+          <div class="cat-overlay absolute inset-0 opacity-10 transition-opacity duration-500" style="background: linear-gradient(135deg, rgba(201,169,110,0.2), transparent);"></div>
+        </div>
+
+        <!-- Category 4: Küpeler -->
+        <div class="category-card rounded-lg aspect-[3/4] flex items-end p-6 cursor-pointer reveal" style="background: url('https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80') center/cover no-repeat; animation-delay: 0.3s;">
+          <div class="relative z-10">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" class="mb-3 opacity-90">
+              <path d="M20 6 V14" stroke="var(--gold)" stroke-width="1"/>
+              <path d="M14 18 L20 14 L26 18 L20 34 Z" stroke="var(--gold)" stroke-width="1" fill="none"/>
+              <path d="M20 14 V34" stroke="var(--gold)" stroke-width="0.5" opacity="0.6"/>
+            </svg>
+            <div class="font-display text-xl font-semibold mb-1" style="color: var(--text-light);">Küpeler</div>
+            <div class="text-xs" style="color: var(--gold-light);">Halka, Sallantılı, Taşlı</div>
+          </div>
+          <div class="cat-overlay absolute inset-0 opacity-10 transition-opacity duration-500" style="background: linear-gradient(135deg, rgba(201,169,110,0.2), transparent);"></div>
+        </div>
+
+        <!-- Category 5: Bileklikler -->
+        <div class="category-card rounded-lg aspect-[3/4] flex items-end p-6 cursor-pointer reveal" style="background: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80') center/cover no-repeat; animation-delay: 0.4s;">
+          <div class="relative z-10">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" class="mb-3 opacity-90">
+              <path d="M8 20 Q8 10 20 10 Q32 10 32 20 Q32 30 20 30 Q8 30 8 20Z" stroke="var(--gold)" stroke-width="1" fill="none"/>
+              <circle cx="20" cy="10" r="2" fill="var(--gold)" opacity="0.8"/>
+              <path d="M12 20 H28" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/>
+            </svg>
+            <div class="font-display text-xl font-semibold mb-1" style="color: var(--text-light);">Bileklikler</div>
+            <div class="text-xs" style="color: var(--gold-light);">Su Yolu, Kelepçe, İpli</div>
+          </div>
+          <div class="cat-overlay absolute inset-0 opacity-10 transition-opacity duration-500" style="background: linear-gradient(135deg, rgba(201,169,110,0.2), transparent);"></div>
+        </div>
+
+        <!-- Category 6: Düğün & Nişan -->
+        <div class="category-card rounded-lg aspect-[3/4] flex items-end p-6 cursor-pointer reveal" style="background: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=600&q=80') center/cover no-repeat; animation-delay: 0.5s;">
+          <div class="relative z-10">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" class="mb-3 opacity-90">
+              <circle cx="16" cy="22" r="10" stroke="var(--gold)" stroke-width="1" fill="none"/>
+              <circle cx="24" cy="22" r="10" stroke="var(--gold)" stroke-width="1" fill="none"/>
+              <path d="M20 12 L22 18 L20 16 L18 18 Z" fill="var(--gold)" opacity="0.6"/>
+            </svg>
+            <div class="font-display text-xl font-semibold mb-1" style="color: var(--text-light);">Düğün & Nişan</div>
+            <div class="text-xs" style="color: var(--gold-light);">Alyans, Set, Takı Paketi</div>
+          </div>
+          <div class="cat-overlay absolute inset-0 opacity-10 transition-opacity duration-500" style="background: linear-gradient(135deg, rgba(201,169,110,0.2), transparent);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COLLECTIONS / PRODUCTS SECTION ========== -->
+  <section id="koleksiyonlar" class="py-28 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-10 reveal">
+        <div class="flex items-center gap-3 justify-center mb-4">
+          <div class="diamond-shape"></div>
+          <span class="text-xs tracking-[4px] uppercase" style="color: var(--gold);">Koleksiyonlar</span>
+          <div class="diamond-shape"></div>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-gold-gradient">Öne Çıkan Ürünler</span>
+        </h2>
+        <p class="max-w-xl mx-auto" style="color: var(--text-muted);">
+          En çok tercih edilen ve yeni sezon koleksiyonlarımızdan seçmeler.
+        </p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex flex-wrap justify-center gap-2 mb-12 reveal">
+        <button class="tab-btn active" onclick="filterProducts('all', this)">Tümü</button>
+        <button class="tab-btn" onclick="filterProducts('pirlanta', this)">Pırlanta</button>
+        <button class="tab-btn" onclick="filterProducts('altin', this)">Altın</button>
+        <button class="tab-btn" onclick="filterProducts('bilezik', this)">Bilezik</button>
+        <button class="tab-btn" onclick="filterProducts('kolye', this)">Kolye</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="productsGrid">
+
+        <!-- Product 1 -->
+        <div class="product-card border-gold rounded-lg overflow-hidden reveal" data-category="pirlanta">
+          <div class="product-img" style="min-height:280px;padding:0;">
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" alt="Tektaş Pırlanta Yüzük" style="width:100%;height:280px;object-fit:cover;">
+            <div class="absolute top-4 left-4 px-3 py-1 text-xs tracking-wider uppercase rounded-sm" style="background: var(--gold); color: var(--darker);">Yeni</div>
+          </div>
+          <div class="p-5">
+            <div class="text-xs tracking-wider uppercase mb-2" style="color: var(--gold);">Pırlanta Yüzük</div>
+            <h3 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">Tektaş Pırlanta Yüzük</h3>
+            <p class="text-sm mb-3" style="color: var(--text-muted);">0.30 Karat, VS Berraklık, F Renk, IGI Sertifikalı</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold" style="color: var(--gold);">Fiyat için arayın</span>
+              <button class="text-xs tracking-wider uppercase px-4 py-2 border-gold rounded-sm hover:bg-[var(--gold)] hover:text-[var(--darker)] transition-all" style="color: var(--gold); background: none; cursor: pointer; border: 1px solid var(--gold);">Detay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card border-gold rounded-lg overflow-hidden reveal" data-category="bilezik" style="animation-delay: 0.1s;">
+          <div class="product-img" style="min-height:280px;padding:0;">
+            <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80" alt="22 Ayar Burma Bilezik" style="width:100%;height:280px;object-fit:cover;">
+            <div class="absolute top-4 left-4 px-3 py-1 text-xs tracking-wider uppercase rounded-sm" style="background: var(--gold); color: var(--darker);">Popüler</div>
+          </div>
+          <div class="p-5">
+            <div class="text-xs tracking-wider uppercase mb-2" style="color: var(--gold);">Altın Bilezik</div>
+            <h3 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">22 Ayar Burma Bilezik</h3>
+            <p class="text-sm mb-3" style="color: var(--text-muted);">Geleneksel işçilik, 22 ayar saf altın, zarif burma model</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold" style="color: var(--gold);">Fiyat için arayın</span>
+              <button class="text-xs tracking-wider uppercase px-4 py-2 border-gold rounded-sm hover:bg-[var(--gold)] hover:text-[var(--darker)] transition-all" style="color: var(--gold); background: none; cursor: pointer; border: 1px solid var(--gold);">Detay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card border-gold rounded-lg overflow-hidden reveal" data-category="kolye" style="animation-delay: 0.2s;">
+          <div class="product-img" style="min-height:280px;padding:0;">
+            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" alt="Pırlanta Damla Kolye" style="width:100%;height:280px;object-fit:cover;">
+          </div>
+          <div class="p-5">
+            <div class="text-xs tracking-wider uppercase mb-2" style="color: var(--gold);">Pırlanta Kolye</div>
+            <h3 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">Pırlanta Damla Kolye</h3>
+            <p class="text-sm mb-3" style="color: var(--text-muted);">14 Ayar beyaz altın üzeri pırlanta, zarif damla tasarım</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold" style="color: var(--gold);">Fiyat için arayın</span>
+              <button class="text-xs tracking-wider uppercase px-4 py-2 border-gold rounded-sm hover:bg-[var(--gold)] hover:text-[var(--darker)] transition-all" style="color: var(--gold); background: none; cursor: pointer; border: 1px solid var(--gold);">Detay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card border-gold rounded-lg overflow-hidden reveal" data-category="pirlanta">
+          <div class="product-img" style="min-height:280px;padding:0;">
+            <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80" alt="Beştaş Pırlanta Yüzük" style="width:100%;height:280px;object-fit:cover;">
+          </div>
+          <div class="p-5">
+            <div class="text-xs tracking-wider uppercase mb-2" style="color: var(--gold);">Pırlanta Yüzük</div>
+            <h3 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">Beştaş Pırlanta Yüzük</h3>
+            <p class="text-sm mb-3" style="color: var(--text-muted);">5 adet pırlanta taş, 14 ayar beyaz altın, modern tasarım</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold" style="color: var(--gold);">Fiyat için arayın</span>
+              <button class="text-xs tracking-wider uppercase px-4 py-2 border-gold rounded-sm hover:bg-[var(--gold)] hover:text-[var(--darker)] transition-all" style="color: var(--gold); background: none; cursor: pointer; border: 1px solid var(--gold);">Detay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card border-gold rounded-lg overflow-hidden reveal" data-category="altin" style="animation-delay: 0.1s;">
+          <div class="product-img" style="min-height:280px;padding:0;">
+            <img src="https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?auto=format&fit=crop&w=600&q=80" alt="14 Ayar Baget Taşlı Yüzük" style="width:100%;height:280px;object-fit:cover;">
+            <div class="absolute top-4 left-4 px-3 py-1 text-xs tracking-wider uppercase rounded-sm" style="background: var(--gold); color: var(--darker);">Trend</div>
+          </div>
+          <div class="p-5">
+            <div class="text-xs tracking-wider uppercase mb-2" style="color: var(--gold);">Altın Yüzük</div>
+            <h3 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">14 Ayar Baget Taşlı Yüzük</h3>
+            <p class="text-sm mb-3" style="color: var(--text-muted);">14 ayar altın, baget kesim taşlar, zarif tasarım</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold" style="color: var(--gold);">Fiyat için arayın</span>
+              <button class="text-xs tracking-wider uppercase px-4 py-2 border-gold rounded-sm hover:bg-[var(--gold)] hover:text-[var(--darker)] transition-all" style="color: var(--gold); background: none; cursor: pointer; border: 1px solid var(--gold);">Detay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card border-gold rounded-lg overflow-hidden reveal" data-category="bilezik" style="animation-delay: 0.2s;">
+          <div class="product-img" style="min-height:280px;padding:0;">
+            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80" alt="Su Yolu Pırlanta Bileklik" style="width:100%;height:280px;object-fit:cover;">
+          </div>
+          <div class="p-5">
+            <div class="text-xs tracking-wider uppercase mb-2" style="color: var(--gold);">Pırlanta Bileklik</div>
+            <h3 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">Su Yolu Pırlanta Bileklik</h3>
+            <p class="text-sm mb-3" style="color: var(--text-muted);">14 ayar beyaz altın, su yolu tasarım, pırlanta taşlar</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold" style="color: var(--gold);">Fiyat için arayın</span>
+              <button class="text-xs tracking-wider uppercase px-4 py-2 border-gold rounded-sm hover:bg-[var(--gold)] hover:text-[var(--darker)] transition-all" style="color: var(--gold); background: none; cursor: pointer; border: 1px solid var(--gold);">Detay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="product-card border-gold rounded-lg overflow-hidden reveal" data-category="kolye">
+          <div class="product-img" style="min-height:280px;padding:0;">
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="14 Ayar Geometrik Kolye" style="width:100%;height:280px;object-fit:cover;">
+          </div>
+          <div class="p-5">
+            <div class="text-xs tracking-wider uppercase mb-2" style="color: var(--gold);">Altın Kolye</div>
+            <h3 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">14 Ayar Geometrik Kolye</h3>
+            <p class="text-sm mb-3" style="color: var(--text-muted);">14 ayar altın, modern geometrik tasarım, günlük kullanım</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold" style="color: var(--gold);">Fiyat için arayın</span>
+              <button class="text-xs tracking-wider uppercase px-4 py-2 border-gold rounded-sm hover:bg-[var(--gold)] hover:text-[var(--darker)] transition-all" style="color: var(--gold); background: none; cursor: pointer; border: 1px solid var(--gold);">Detay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="product-card border-gold rounded-lg overflow-hidden reveal" data-category="pirlanta" style="animation-delay: 0.1s;">
+          <div class="product-img" style="min-height:280px;padding:0;">
+            <img src="https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=600&q=80" alt="Gerdanlık Pırlanta Set" style="width:100%;height:280px;object-fit:cover;">
+            <div class="absolute top-4 left-4 px-3 py-1 text-xs tracking-wider uppercase rounded-sm" style="background: var(--gold); color: var(--darker);">Özel</div>
+          </div>
+          <div class="p-5">
+            <div class="text-xs tracking-wider uppercase mb-2" style="color: var(--gold);">Pırlanta Kolye</div>
+            <h3 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">Gerdanlık Pırlanta Set</h3>
+            <p class="text-sm mb-3" style="color: var(--text-muted);">Düğün ve özel geceler için muhteşem pırlanta gerdanlık</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold" style="color: var(--gold);">Fiyat için arayın</span>
+              <button class="text-xs tracking-wider uppercase px-4 py-2 border-gold rounded-sm hover:bg-[var(--gold)] hover:text-[var(--darker)] transition-all" style="color: var(--gold); background: none; cursor: pointer; border: 1px solid var(--gold);">Detay</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 9 -->
+        <div class="product-card border-gold rounded-lg overflow-hidden reveal" data-category="altin" style="animation-delay: 0.2s;">
+          <div class="product-img" style="min-height:280px;padding:0;">
+            <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80" alt="Mega Kelepçe Bilezik" style="width:100%;height:280px;object-fit:cover;">
+          </div>
+          <div class="p-5">
+            <div class="text-xs tracking-wider uppercase mb-2" style="color: var(--gold);">Altın Bilezik</div>
+            <h3 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">Mega Kelepçe Bilezik</h3>
+            <p class="text-sm mb-3" style="color: var(--text-muted);">14 ayar altın, mega kelepçe model, gösterişli tasarım</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold" style="color: var(--gold);">Fiyat için arayın</span>
+              <button class="text-xs tracking-wider uppercase px-4 py-2 border-gold rounded-sm hover:bg-[var(--gold)] hover:text-[var(--darker)] transition-all" style="color: var(--gold); background: none; cursor: pointer; border: 1px solid var(--gold);">Detay</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center mt-12 reveal">
+        <a href="https://www.instagram.com/kocakpirlantakuyumculuk/" target="_blank" class="btn-outline inline-flex items-center gap-3">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          Tüm Ürünleri İnstagram'da Görün
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BANNER / CTA SECTION ========== -->
+  <section class="py-20 px-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(201,169,110,0.08), rgba(13,13,13,0.95), rgba(201,169,110,0.05));">
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 30% 50%, rgba(201,169,110,0.06) 0%, transparent 60%);"></div>
+    <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
+      <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">
+        <span class="text-gold-gradient">Türkiye'nin Bileziği Koçak'tır</span>
+      </h2>
+      <p class="text-lg mb-8" style="color: var(--text-muted);">
+        Hayalinizdeki mücevheri birlikte tasarlayalım. Özel siparişler için mağazamızı ziyaret edin.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="tel:03122226662" class="btn-gold inline-flex items-center justify-center gap-2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          Hemen Ara
+        </a>
+        <a href="#iletisim" class="btn-outline inline-block text-center">Yol Tarifi Al</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES SECTION ========== -->
+  <section id="hizmetler" class="py-28 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="flex items-center gap-3 justify-center mb-4">
+          <div class="diamond-shape"></div>
+          <span class="text-xs tracking-[4px] uppercase" style="color: var(--gold);">Hizmetler</span>
+          <div class="diamond-shape"></div>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-gold-gradient">Neden Koçak Diamond?</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Service 1 -->
+        <div class="p-8 rounded-lg border-gold border-gold-hover text-center transition-all duration-300 reveal" style="background: linear-gradient(145deg, rgba(26,26,26,0.6), rgba(26,26,26,0.2));">
+          <div class="w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center" style="background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M14 3 L23 10 L14 25 L5 10 Z" stroke="var(--gold)" stroke-width="1.2" fill="none"/>
+              <path d="M5 10 H23" stroke="var(--gold)" stroke-width="0.8"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg font-semibold mb-3" style="color: var(--text-light);">IGI Sertifikalı Pırlanta</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
+            Uluslararası Gemoloji Enstitüsü (IGI) sertifikası ile güvence altında olan pırlantalar.
+          </p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="p-8 rounded-lg border-gold border-gold-hover text-center transition-all duration-300 reveal" style="background: linear-gradient(145deg, rgba(26,26,26,0.6), rgba(26,26,26,0.2)); animation-delay: 0.1s;">
+          <div class="w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center" style="background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg font-semibold mb-3" style="color: var(--text-light);">Düğün & Nişan Paketleri</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
+            Özel gününüz için alyans, tektaş ve takı paketleri ile hayalinizdeki düğüne kavuşun.
+          </p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="p-8 rounded-lg border-gold border-gold-hover text-center transition-all duration-300 reveal" style="background: linear-gradient(145deg, rgba(26,26,26,0.6), rgba(26,26,26,0.2)); animation-delay: 0.2s;">
+          <div class="w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center" style="background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+              <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg font-semibold mb-3" style="color: var(--text-light);">Yatırım Danışmanlığı</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
+            Gram altın, çeyrek altın ve yatırım amaçlı ürünlerle geleceğinizi güvence altına alın.
+          </p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="p-8 rounded-lg border-gold border-gold-hover text-center transition-all duration-300 reveal" style="background: linear-gradient(145deg, rgba(26,26,26,0.6), rgba(26,26,26,0.2)); animation-delay: 0.3s;">
+          <div class="w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center" style="background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg font-semibold mb-3" style="color: var(--text-light);">Güvenli Alışveriş</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
+            Tüm ürünlerimiz fatura garantili, taksit imkânlı ve güvenilir alışveriş deneyimi sunar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIALS SECTION ========== -->
+  <section class="py-28 px-6" style="background: linear-gradient(180deg, var(--darker), #111, var(--darker));">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="flex items-center gap-3 justify-center mb-4">
+          <div class="diamond-shape"></div>
+          <span class="text-xs tracking-[4px] uppercase" style="color: var(--gold);">Müşteri Yorumları</span>
+          <div class="diamond-shape"></div>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold">
+          <span class="text-gold-gradient">Mutlu Müşterilerimiz</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card rounded-lg p-8 reveal">
+          <div class="flex gap-1 mb-4">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+          </div>
+          <p class="text-sm leading-relaxed mb-6" style="color: var(--text-muted);">
+            "Düğün alışverişimizi burada yaptık. Çok ilgili ve güler yüzlü bir ekip. Ürün kalitesi ve fiyatlar tam istediğimiz gibiydi. Herkese tavsiye ederiz!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold" style="background: rgba(201,169,110,0.15); color: var(--gold);">AY</div>
+            <div>
+              <div class="text-sm font-semibold" style="color: var(--text-light);">Ayşe Y.</div>
+              <div class="text-xs" style="color: var(--text-muted);">Düğün Alışverişi</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card rounded-lg p-8 reveal" style="animation-delay: 0.1s;">
+          <div class="flex gap-1 mb-4">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+          </div>
+          <p class="text-sm leading-relaxed mb-6" style="color: var(--text-muted);">
+            "Nişan tektaşımızı Koçak Diamond'dan aldık. IGI sertifikalı pırlanta seçenekleri çok güvenli hissettirdi. Mükemmel işçilik ve harika bir deneyimdi."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold" style="background: rgba(201,169,110,0.15); color: var(--gold);">MK</div>
+            <div>
+              <div class="text-sm font-semibold" style="color: var(--text-light);">Mehmet K.</div>
+              <div class="text-xs" style="color: var(--text-muted);">Nişan Alışverişi</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card rounded-lg p-8 reveal" style="animation-delay: 0.2s;">
+          <div class="flex gap-1 mb-4">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--gold)"><path d="M8 0l2.472 5.011L16 5.819l-4 3.898.944 5.505L8 12.616l-4.944 2.606L4 9.717 0 5.82l5.528-.808z"/></svg>
+          </div>
+          <p class="text-sm leading-relaxed mb-6" style="color: var(--text-muted);">
+            "Yatırım amaçlı altın alımında çok yardımcı oldular. Gram altın ve bilezik konusunda uzman bir ekip. Elvankent'in en güvenilir kuyumcusu!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold" style="background: rgba(201,169,110,0.15); color: var(--gold);">FD</div>
+            <div>
+              <div class="text-sm font-semibold" style="color: var(--text-light);">Fatma D.</div>
+              <div class="text-xs" style="color: var(--text-muted);">Yatırım Danışmanlığı</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section id="iletisim" class="py-28 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="flex items-center gap-3 justify-center mb-4">
+          <div class="diamond-shape"></div>
+          <span class="text-xs tracking-[4px] uppercase" style="color: var(--gold);">İletişim</span>
+          <div class="diamond-shape"></div>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+          <span class="text-gold-gradient">Bize Ulaşın</span>
+        </h2>
+        <p class="max-w-xl mx-auto" style="color: var(--text-muted);">
+          Showroom'umuzu ziyaret edin veya bilgi almak için bizimle iletişime geçin.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10">
+        <!-- Contact Info -->
+        <div class="reveal">
+          <div class="space-y-8">
+            <!-- Address -->
+            <div class="flex items-start gap-5 p-6 rounded-lg border-gold" style="background: linear-gradient(145deg, rgba(26,26,26,0.6), rgba(26,26,26,0.2));">
+              <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">Adres</h4>
+                <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
+                  Atakent Mah. Şehit Murat Üçöz Cad.<br>
+                  (Elvankent 14. Cadde) No: 20/D<br>
+                  Etimesgut / Ankara
+                </p>
+                <p class="text-xs mt-2" style="color: var(--gold);">XJ37+VC Etimesgut, Ankara</p>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="flex items-start gap-5 p-6 rounded-lg border-gold" style="background: linear-gradient(145deg, rgba(26,26,26,0.6), rgba(26,26,26,0.2));">
+              <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">Telefon</h4>
+                <a href="tel:03122226662" class="text-lg font-semibold hover:opacity-80 transition-opacity" style="color: var(--gold);">0312 222 66 62</a>
+              </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="flex items-start gap-5 p-6 rounded-lg border-gold" style="background: linear-gradient(145deg, rgba(26,26,26,0.6), rgba(26,26,26,0.2));">
+              <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 6v6l4 2"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">Çalışma Saatleri</h4>
+                <div class="text-sm space-y-1" style="color: var(--text-muted);">
+                  <div class="flex justify-between gap-8">
+                    <span>Pazartesi - Cumartesi</span>
+                    <span style="color: var(--gold);">09:30 - 20:00</span>
+                  </div>
+                  <div class="flex justify-between gap-8">
+                    <span>Pazar</span>
+                    <span style="color: var(--text-muted);">Kapalı</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social -->
+            <div class="flex items-start gap-5 p-6 rounded-lg border-gold" style="background: linear-gradient(145deg, rgba(26,26,26,0.6), rgba(26,26,26,0.2));">
+              <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </div>
+              <div>
+                <h4 class="font-display text-lg font-semibold mb-2" style="color: var(--text-light);">Sosyal Medya</h4>
+                <a href="https://www.instagram.com/kocakpirlantakuyumculuk/" target="_blank" class="text-sm hover:opacity-80 transition-opacity inline-flex items-center gap-2" style="color: var(--gold);">
+                  @kocakpirlantakuyumculuk
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="reveal" style="animation-delay: 0.2s;">
+          <div class="map-container rounded-lg overflow-hidden h-full min-h-[500px] flex flex-col">
+            <div class="p-6 flex-1 flex flex-col items-center justify-center text-center">
+              <!-- Stylized Map Illustration -->
+              <div class="relative w-full max-w-sm mx-auto mb-8">
+                <svg viewBox="0 0 400 300" fill="none" class="w-full opacity-30">
+                  <!-- Roads -->
+                  <path d="M0 150 H400" stroke="var(--gold)" stroke-width="2" opacity="0.3"/>
+                  <path d="M200 0 V300" stroke="var(--gold)" stroke-width="2" opacity="0.3"/>
+                  <path d="M50 80 H350" stroke="var(--gold)" stroke-width="1" opacity="0.2"/>
+                  <path d="M50 220 H350" stroke="var(--gold)" stroke-width="1" opacity="0.2"/>
+                  <path d="M100 0 V300" stroke="var(--gold)" stroke-width="1" opacity="0.2"/>
+                  <path d="M300 0 V300" stroke="var(--gold)" stroke-width="1" opacity="0.2"/>
+                  <!-- Location pin -->
+                  <circle cx="200" cy="140" r="30" fill="rgba(201,169,110,0.2)" stroke="var(--gold)" stroke-width="1.5"/>
+                  <circle cx="200" cy="140" r="12" fill="var(--gold)" opacity="0.6"/>
+                  <circle cx="200" cy="140" r="50" fill="none" stroke="var(--gold)" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.3"/>
+                </svg>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse-gold">
+                  <div class="w-4 h-4 rounded-full" style="background: var(--gold);"></div>
+                </div>
+              </div>
+
+              <div class="font-display text-xl font-semibold mb-2" style="color: var(--text-light);">Elvankent, Etimesgut</div>
+              <p class="text-sm mb-6" style="color: var(--text-muted);">Şehit Murat Üçöz Caddesi üzerinde, kolay ulaşılabilir konumda</p>
+
+              <a href="https://www.google.com/maps/place/XJ37%2BVC+Etimesgut,+Ankara" target="_blank" class="btn-gold inline-flex items-center gap-2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Google Maps'te Aç
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="py-16 px-6" style="background: #0a0a0a; border-top: 1px solid rgba(201,169,110,0.1);">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
+        <!-- Brand -->
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+              <path d="M20 2 L35 14 L20 38 L5 14 Z" stroke="url(#footGrad)" stroke-width="1.5" fill="none"/>
+              <path d="M5 14 H35" stroke="url(#footGrad)" stroke-width="1"/>
+              <defs>
+                <linearGradient id="footGrad" x1="0" y1="0" x2="40" y2="40">
+                  <stop offset="0%" stop-color="#B8944F"/>
+                  <stop offset="100%" stop-color="#D4B97A"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div>
+              <div class="font-display text-lg text-gold-gradient font-semibold">KOÇAK</div>
+              <div class="text-[10px] tracking-[3px] uppercase" style="color: var(--text-muted);">Diamond</div>
+            </div>
+          </div>
+          <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
+            Pırlanta ve altın mücevheratta güvenin adresi. Elvankent, Ankara.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-display text-sm tracking-wider uppercase mb-4" style="color: var(--gold);">Hızlı Bağlantılar</h4>
+          <div class="space-y-3">
+            <a href="#hero" class="block text-sm hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Ana Sayfa</a>
+            <a href="#hakkimizda" class="block text-sm hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Hakkımızda</a>
+            <a href="#koleksiyonlar" class="block text-sm hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Koleksiyonlar</a>
+            <a href="#iletisim" class="block text-sm hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">İletişim</a>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div>
+          <h4 class="font-display text-sm tracking-wider uppercase mb-4" style="color: var(--gold);">Kategoriler</h4>
+          <div class="space-y-3">
+            <a href="#kategoriler" class="block text-sm hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Pırlanta Yüzükler</a>
+            <a href="#kategoriler" class="block text-sm hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Altın Bilezikler</a>
+            <a href="#kategoriler" class="block text-sm hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Kolyeler</a>
+            <a href="#kategoriler" class="block text-sm hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Düğün & Nişan</a>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="font-display text-sm tracking-wider uppercase mb-4" style="color: var(--gold);">İletişim</h4>
+          <div class="space-y-3">
+            <p class="text-sm" style="color: var(--text-muted);">Elvankent 14. Cad. No: 20/D</p>
+            <p class="text-sm" style="color: var(--text-muted);">Etimesgut / Ankara</p>
+            <a href="tel:03122226662" class="block text-sm hover:opacity-80 transition-opacity" style="color: var(--gold);">0312 222 66 62</a>
+            <a href="https://www.instagram.com/kocakpirlantakuyumculuk/" target="_blank" class="inline-flex items-center gap-2 text-sm hover:opacity-80 transition-opacity" style="color: var(--gold);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="section-divider mb-8"></div>
+
+      <!-- Copyright -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-xs" style="color: var(--text-muted);">
+          &copy; 2024 Koçak Diamond - Koçak Pırlanta Kuyumculuk. Tüm hakları saklıdır.
+        </p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="text-xs hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Gizlilik Politikası</a>
+          <a href="#" class="text-xs hover:text-[var(--gold)] transition-colors" style="color: var(--text-muted);">Kullanım Şartları</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/903122226662" target="_blank" class="whatsapp-btn" title="WhatsApp ile iletişim">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
+
+    // Product filter
+    function filterProducts(category, btn) {
+      const cards = document.querySelectorAll('.product-card');
+      const tabs = document.querySelectorAll('.tab-btn');
+
+      tabs.forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.transition = 'all 0.4s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 50);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Navbar scroll effect
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > 100) {
+        nav.style.borderBottom = '1px solid rgba(201,169,110,0.1)';
+        nav.style.padding = '0';
+      } else {
+        nav.style.borderBottom = 'none';
+        nav.style.padding = '';
+      }
+
+      lastScroll = currentScroll;
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
